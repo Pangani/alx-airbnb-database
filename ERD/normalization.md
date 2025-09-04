@@ -43,15 +43,12 @@ This builds upon 2NF by ensuring that:
 
 *Checking our database schema in 2NF, we note that:*
 
-1. **`Booking.total_price` (derived / potentially redundant)**  
-   - `total_price` is derivable from `start_date`, `end_date`, and the property’s nightly price **at booking time**.  
-   - Keeping it may create **update anomalies** (e.g., if `Property.price_per_night` changes later).  
-   - **3NF Action (strict):** Do not store `total_price`. Instead:  
-     - Store a **snapshot** field in `Booking`: `unit_price_at_booking` (the agreed nightly rate at the time of booking).  
-     - Compute `total_price` in queries as: `DATEDIFF(end_date, start_date) * unit_price_at_booking - discounts + fees`.  
-   - **Pragmatic Option (denormalization):** If you must store `total_price` for performance, document it as a **controlled denormalization** and ensure you maintain it via triggers / application logic.
+1) **`Booking.total_price`**  
+   - `total_price` is derivable from `start_date`, `end_date`, and the property’s nightly price **at booking time**. Keeping it may create **update anomalies** (e.g., if `Property.price_per_night` changes later).  
+   - *Solution:* Should use the nightly rate at the time of booking. Add the field `Booking.unit_price_at_booking`
+   - Compute `total_price` in queries as: `DATEDIFF(end_date, start_date) * unit_price_at_booking - discounts + fees`.
 
-2. **ENUMs for `Booking.status` and `Payment.payment_method`**  
+2) **ENUMs for `Booking.status` and `Payment.payment_method`**  
    - ENUMs don’t **violate** 3NF by themselves, but they’re rigid and block attaching attributes (e.g., status order, terminal state flag; payment method fees).  
    - **3NF Action:** Normalize to lookup tables: `BookingStatus(status_code, label, is_terminal, sort_order, ...)` and `PaymentMethod(method_code, label, ...)`.  
    - This prevents transitive dependencies if you later add attributes about these codes.
