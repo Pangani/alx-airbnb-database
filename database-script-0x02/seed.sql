@@ -5,10 +5,10 @@
 -- Users
 INSERT INTO "User" (user_id, first_name, last_name, email, password_hash, phone_number, role)
 VALUES
-  ('u1', 'Alice', 'Johnson', 'alice@example.com', 'hashed_pw1', '+265991234567', 'guest'),
-  ('u2', 'Bob', 'Smith', 'bob@example.com', 'hashed_pw2', '+265998765432', 'host'),
-  ('u3', 'Charlie', 'Brown', 'charlie@example.com', 'hashed_pw3', '+265997777777', 'guest'),
-  ('u4', 'Diana', 'Ngoma', 'diana@example.com', 'hashed_pw4', '+265996666666', 'admin');
+  ('u1', 'Milika', 'Pangani', 'millie@example.com', 'hashed_pw1', '+265991234567', 'guest'),
+  ('u2', 'Chris', 'Madeya', 'chris@example.com', 'hashed_pw2', '+265998765432', 'host'),
+  ('u3', 'Rejoice', 'Fungula', 'rejoice@example.com', 'hashed_pw3', '+265997777777', 'guest'),
+  ('u4', 'Ekarhi', 'Ngoma', 'ekarhi@example.com', 'hashed_pw4', '+265996666666', 'admin');
 
 -- Properties
 INSERT INTO Property (property_id, host_id, name, description, location, pricepernight)
@@ -43,5 +43,5 @@ VALUES
 -- Messages
 INSERT INTO Message (message_id, sender_id, recipient_id, message_body)
 VALUES
-  ('m1', 'u1', 'u2', 'Hi Bob, is the cottage available for next weekend?'),
-  ('m2', 'u2', 'u1', 'Hi Alice, yes the cottage is available. Looking forward to hosting you!');
+  ('m1', 'u1', 'u2', 'Hi Chris, is the cottage available for next weekend?'),
+  ('m2', 'u2', 'u1', 'Hi Milika, yes the cottage is available. Looking forward to hosting you!');
